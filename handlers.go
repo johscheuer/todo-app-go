@@ -1,7 +1,7 @@
 package main
 
 import (
-	//	"encoding/json"
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -13,8 +13,10 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func ShowAllTodo(w http.ResponseWriter, r *http.Request) {
-	RedisGetAllTodos()
-	fmt.Fprintln(w, "Show all todos")
+	todos := RedisGetAllTodos()
+	jsonTodos, _ := json.Marshal(todos)
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, string(jsonTodos))
 }
 
 func DeleteTodo(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +24,8 @@ func DeleteTodo(w http.ResponseWriter, r *http.Request) {
 	name := vars["name"]
 
 	RedisDeleteTodo(name)
-	fmt.Fprintln(w, "delete a todo name %s", name)
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "delete a todo name %s", name)
 }
 
 func CreateTodo(w http.ResponseWriter, r *http.Request) {
@@ -31,10 +34,10 @@ func CreateTodo(w http.ResponseWriter, r *http.Request) {
 
 	RedisCreateTodo(name)
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintln(w, "create a todo name %s", name)
+	fmt.Fprintf(w, "create a todo name %s", name)
 }
 
 func HealthCheck(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(200)
+	w.WriteHeader(http.StatusOK)
 	fmt.Fprintf(w, "alive")
 }

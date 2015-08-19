@@ -62,9 +62,9 @@ func RedisDeleteTodo(name string) {
 	fmt.Println(cmd)
 }
 
-func RedisGetAllTodos() {
+func RedisGetAllTodos() []string {
 	srvEntry := GetRedisSlave()
 	client := CreateRedisClient(srvEntry.Target, strconv.Itoa(int(srvEntry.Port)))
 	cmd := client.LRange(redisKey, -100, 100)
-	fmt.Println(cmd.Val())
+	return cmd.Val()
 }
