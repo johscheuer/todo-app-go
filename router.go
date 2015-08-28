@@ -1,6 +1,6 @@
 package main
 
-import "github.com/gorilla/mux"
+import "github.com/johscheuer/todo-app-go/Godeps/_workspace/src/github.com/gorilla/mux"
 
 func NewRouter() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)

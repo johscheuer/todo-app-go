@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/johscheuer/todo-app-go/Godeps/_workspace/src/github.com/gorilla/mux"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {

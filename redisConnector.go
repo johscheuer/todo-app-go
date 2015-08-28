@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/redis.v3"
+	"github.com/johscheuer/todo-app-go/Godeps/_workspace/src/gopkg.in/redis.v3"
 	"net"
 	"strconv"
 )
